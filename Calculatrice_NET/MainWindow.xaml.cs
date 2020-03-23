@@ -70,7 +70,7 @@ namespace Calculatrice_NET
                     Display += "2";
                     break;
                 case "System.Windows.Controls.Button: 3":
-                    Display += "5";
+                    Display += "3";
                     break;
                 case "System.Windows.Controls.Button: 4":
                     Display += "4";
@@ -112,6 +112,9 @@ namespace Calculatrice_NET
                     break;
                 case "System.Windows.Controls.Button: Supprimer":
                     Display = "";
+                    break;
+                case "System.Windows.Controls.Button: =":
+                    Display = new System.Data.DataTable().Compute(Display, null).ToString();
                     break;
 
 
