@@ -58,11 +58,15 @@ namespace Calculatrice_NET
             set { SetValue(value); }
         }
 
+        // Affichage des valeurs dans l'écran de calcul
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             switch (sender.ToString())
             {
                 // Numeric values
+                case "System.Windows.Controls.Button: 0":
+                    Display += "0";
+                    break;
                 case "System.Windows.Controls.Button: 1":
                     Display += "1";
                     break;
@@ -103,6 +107,10 @@ namespace Calculatrice_NET
                 case "System.Windows.Controls.Button: *":
                     Display += "*";
                     break;
+                case "System.Windows.Controls.Button: 1/x":
+                    // TODO: Gérer l'erreur Display == 0 en créant une autre methode (comme ComputeButton_Click)
+                    Display = "1/("+Display+")";
+                    break;
                 // Others
                 case "System.Windows.Controls.Button: (":
                     Display += "(";
@@ -110,11 +118,11 @@ namespace Calculatrice_NET
                 case "System.Windows.Controls.Button: )":
                     Display += ")";
                     break;
+                case "System.Windows.Controls.Button: ,":
+                    Display += ".";
+                    break;
                 case "System.Windows.Controls.Button: Supprimer":
                     Display = "";
-                    break;
-                case "System.Windows.Controls.Button: =":
-                    Display = new System.Data.DataTable().Compute(Display, null).ToString();
                     break;
             }
         }
@@ -123,8 +131,20 @@ namespace Calculatrice_NET
         {
             if (Display != null && Display.Length > 0 )
             {
+                // On supprime le dernier caractère du calcul
                 Display = Display.Remove(Display.Length - 1);
             }
         }
+
+        private void ComputeButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (Display != null && Display.Length > 0)
+            {
+                // TODO: Gerer l'erreur des nombres trop grands
+                // Réalisation du calcul
+                Display = new System.Data.DataTable().Compute(Display, null).ToString();
+            }
+        }
+
     }
 }
