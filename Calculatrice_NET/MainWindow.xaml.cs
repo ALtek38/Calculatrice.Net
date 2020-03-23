@@ -116,9 +116,14 @@ namespace Calculatrice_NET
                 case "System.Windows.Controls.Button: =":
                     Display = new System.Data.DataTable().Compute(Display, null).ToString();
                     break;
+            }
+        }
 
-
-
+        private void BackButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (Display != null && Display.Length > 0 )
+            {
+                Display = Display.Remove(Display.Length - 1);
             }
         }
     }
