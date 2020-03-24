@@ -156,6 +156,8 @@ namespace Calculatrice_NET
 
                 Display = result;
 
+                Display = "";
+
                 SaveToHistory(compute, result);
             }
         }
