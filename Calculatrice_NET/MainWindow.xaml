@@ -175,7 +175,9 @@
                 Click="ComputeButton_Click"/>
         <ListBox Grid.Column="5"
                  Grid.RowSpan="7"
+                 SelectionMode="Single"
                  FontSize="18"
+                 SelectionChanged="ReloadHistoryItem"
                  ItemsSource="{Binding History}"
                  SelectedItem="{Binding SelectedItem}"/>
 

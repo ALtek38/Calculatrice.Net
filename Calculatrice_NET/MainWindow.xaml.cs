@@ -172,5 +172,11 @@ namespace Calculatrice_NET
             History.Clear();
         }
 
+        private void ReloadHistoryItem(object sender, SelectionChangedEventArgs args)
+        {
+            HistoryItem itemToReload = ((sender as ListBox).SelectedItem as HistoryItem);
+            Display = itemToReload.Compute;
+        }
+
     }
 }
