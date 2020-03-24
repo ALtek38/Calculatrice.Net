@@ -67,6 +67,20 @@ namespace Calculatrice_NET
             set { SetValue(value); }
         }
 
+        // Méthodes
+
+        public string Calcule(string expression)
+        {
+            return new System.Data.DataTable().Compute(expression, null).ToString();
+        }
+
+        public void ShowError(string message="Erreur")
+        {
+            MessageBox.Show(message, "Erreur");
+        }
+
+        // Gestion des clics des boutons
+
         // Affichage des valeurs dans l'écran de calcul
         private void Button_Click(object sender, RoutedEventArgs e)
         {
@@ -116,10 +130,6 @@ namespace Calculatrice_NET
                 case "System.Windows.Controls.Button: *":
                     Display += "*";
                     break;
-                case "System.Windows.Controls.Button: 1/x":
-                    // TODO: Gérer l'erreur Display == 0 en créant une autre methode (comme ComputeButton_Click)
-                    Display = "1/("+Display+")";
-                    break;
                 // Others
                 case "System.Windows.Controls.Button: (":
                     Display += "(";
@@ -149,16 +159,20 @@ namespace Calculatrice_NET
         {
             if (Display != null && Display.Length > 0)
             {
-                // TODO: Gerer l'erreur des nombres trop grands
                 // Réalisation du calcul
-                var compute = Display;
-                var result = new System.Data.DataTable().Compute(Display, null).ToString();
-
-                Display = result;
-
-                Display = "";
-
-                SaveToHistory(compute, result);
+                try
+                {
+                    // Réalisation du calcul
+                    var compute = Display;
+                    var result = Calcule(Display);
+                    Display = result;
+                    SaveToHistory(compute, result);
+                    Display = "";
+                }
+                catch (Exception ex)
+                {
+                    ShowError(ex.Message);
+                }
             }
         }
 
@@ -174,9 +188,29 @@ namespace Calculatrice_NET
 
         private void ReloadHistoryItem(object sender, SelectionChangedEventArgs args)
         {
-            HistoryItem itemToReload = ((sender as ListBox).SelectedItem as HistoryItem);
-            Display = itemToReload.Compute;
+            if ((sender as ListBox).SelectedItem != null)
+            {
+                HistoryItem itemToReload = ((sender as ListBox).SelectedItem as HistoryItem);
+                Display = itemToReload.Compute;
+            }
         }
 
+        private void InverseButton_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                if (Display != null && Display.Length > 0 && Calcule(Display) != "0")
+                {
+                    Display = "1/(" + Display + ")";
+                }
+                else if (Calcule(Display) == "0")
+                {
+                    ShowError("Erreur: Division par zéro");
+                }
+            } catch (Exception ex)
+            {
+                ShowError(ex.Message);
+            }
+        }
     }
 }
