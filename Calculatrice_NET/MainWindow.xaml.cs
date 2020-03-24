@@ -51,10 +51,19 @@ namespace Calculatrice_NET
         {
             this.DataContext = this;
             InitializeComponent();
+
+            Display = "";
+            History = new ObservableCollection<HistoryItem>();
         }
 
         public string Display {
             get { return GetValue<string>(); }
+            set { SetValue(value); }
+        }
+
+        public ObservableCollection<HistoryItem> History
+        {
+            get { return GetValue<ObservableCollection<HistoryItem>>(); }
             set { SetValue(value); }
         }
 
@@ -142,8 +151,23 @@ namespace Calculatrice_NET
             {
                 // TODO: Gerer l'erreur des nombres trop grands
                 // Réalisation du calcul
-                Display = new System.Data.DataTable().Compute(Display, null).ToString();
+                var compute = Display;
+                var result = new System.Data.DataTable().Compute(Display, null).ToString();
+
+                Display = result;
+
+                SaveToHistory(compute, result);
             }
+        }
+
+        private void SaveToHistory(string compute, string result)
+        {
+            History.Add(new HistoryItem(compute, result));
+        }
+
+        private void ClearHistoryButton_Click(object sender, RoutedEventArgs e)
+        {
+            History.Clear();
         }
 
     }
