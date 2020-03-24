@@ -212,5 +212,14 @@ namespace Calculatrice_NET
                 ShowError(ex.Message);
             }
         }
+
+        private void ToggleHistoryButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (HistoryListBox.Visibility == Visibility.Hidden) {
+                HistoryListBox.Visibility = Visibility.Visible;
+            } else {
+                HistoryListBox.Visibility = Visibility.Hidden;
+            }
+        }
     }
 }

@@ -186,6 +186,7 @@
                 Grid.ColumnSpan="1"
                 Grid.Row="7"
                 Content="Historique"
+                Click="ToggleHistoryButton_Click"
                 FontSize="20"/>
 
         <Button Grid.Column="1"
@@ -211,6 +212,7 @@
                  Grid.RowSpan="8"
                  SelectionMode="Single"
                  FontSize="18"
+                 x:Name="HistoryListBox"
                  SelectionChanged="ReloadHistoryItem"
                  ItemsSource="{Binding History}"
                  SelectedItem="{Binding SelectedItem}"/>
