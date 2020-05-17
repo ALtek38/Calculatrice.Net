@@ -53,10 +53,17 @@ namespace Calculatrice_NET
             InitializeComponent();
 
             Display = "";
+            CurrentExpression = "";
             History = new ObservableCollection<HistoryItem>();
         }
 
         public string Display {
+            get { return GetValue<string>(); }
+            set { SetValue(value); }
+        }
+
+        public string CurrentExpression
+        {
             get { return GetValue<string>(); }
             set { SetValue(value); }
         }
@@ -71,7 +78,8 @@ namespace Calculatrice_NET
 
         public string Calcule(string expression)
         {
-            return new System.Data.DataTable().Compute(expression, null).ToString();
+            //return new System.Data.DataTable().Compute(expression, null).ToString();
+            return Evaluator.Calculate(ShuntingYard.Parse(expression)).ToString();
         }
 
         public void ShowError(string message="Erreur")
@@ -89,59 +97,77 @@ namespace Calculatrice_NET
                 // Numeric values
                 case "System.Windows.Controls.Button: 0":
                     Display += "0";
+                    CurrentExpression += "0";
                     break;
                 case "System.Windows.Controls.Button: 1":
                     Display += "1";
+                    CurrentExpression += "1";
                     break;
                 case "System.Windows.Controls.Button: 2":
                     Display += "2";
+                    CurrentExpression += "2";
                     break;
                 case "System.Windows.Controls.Button: 3":
                     Display += "3";
+                    CurrentExpression += "3";
                     break;
                 case "System.Windows.Controls.Button: 4":
                     Display += "4";
+                    CurrentExpression += "4";
                     break;
                 case "System.Windows.Controls.Button: 5":
                     Display += "5";
+                    CurrentExpression += "5";
                     break;
                 case "System.Windows.Controls.Button: 6":
                     Display += "6";
+                    CurrentExpression += "6";
                     break;
                 case "System.Windows.Controls.Button: 7":
                     Display += "7";
+                    CurrentExpression += "7";
                     break;
                 case "System.Windows.Controls.Button: 8":
                     Display += "8";
+                    CurrentExpression += "8";
                     break;
                 case "System.Windows.Controls.Button: 9":
                     Display += "9";
+                    CurrentExpression += "9";
                     break;
                 // Operators
                 case "System.Windows.Controls.Button: +":
                     Display += "+";
+                    CurrentExpression += " + ";
                     break;
                 case "System.Windows.Controls.Button: -":
                     Display += "-";
+                    CurrentExpression += " - ";
                     break;
                 case "System.Windows.Controls.Button: /":
                     Display += "/";
+                    CurrentExpression += " / ";
                     break;
                 case "System.Windows.Controls.Button: *":
                     Display += "*";
+                    CurrentExpression += " * ";
                     break;
                 // Others
                 case "System.Windows.Controls.Button: (":
                     Display += "(";
+                    CurrentExpression += " ( ";
                     break;
                 case "System.Windows.Controls.Button: )":
                     Display += ")";
+                    CurrentExpression += " ) ";
                     break;
                 case "System.Windows.Controls.Button: ,":
                     Display += ".";
+                    CurrentExpression += " . ";
                     break;
                 case "System.Windows.Controls.Button: Supprimer":
                     Display = "";
+                    CurrentExpression = "";
                     break;
             }
         }
@@ -152,6 +178,7 @@ namespace Calculatrice_NET
             {
                 // On supprime le dernier caractère du calcul
                 Display = Display.Remove(Display.Length - 1);
+                CurrentExpression = CurrentExpression.Remove(CurrentExpression.Length - 2);
             }
         }
 
@@ -163,11 +190,10 @@ namespace Calculatrice_NET
                 try
                 {
                     // Réalisation du calcul
-                    var compute = Display;
-                    var result = Calcule(Display);
+                    var result = Calcule(CurrentExpression);
+                    SaveToHistory(Display, result, CurrentExpression);
                     Display = result;
-                    SaveToHistory(compute, result);
-                    Display = "";
+                    CurrentExpression = "";
                 }
                 catch (Exception ex)
                 {
@@ -176,9 +202,9 @@ namespace Calculatrice_NET
             }
         }
 
-        private void SaveToHistory(string compute, string result)
+        private void SaveToHistory(string compute, string result, string expression)
         {
-            History.Add(new HistoryItem(compute, result));
+            History.Add(new HistoryItem(compute, result, expression));
         }
 
         private void ClearHistoryButton_Click(object sender, RoutedEventArgs e)
@@ -192,6 +218,7 @@ namespace Calculatrice_NET
             {
                 HistoryItem itemToReload = ((sender as ListBox).SelectedItem as HistoryItem);
                 Display = itemToReload.Compute;
+                CurrentExpression = itemToReload.Expression;
             }
         }
 

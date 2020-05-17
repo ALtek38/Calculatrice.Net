@@ -14,16 +14,23 @@ namespace Calculatrice_NET
             set { SetValue(value);  }
         }
 
+        public string Expression
+        {
+            get { return GetValue<String>(); }
+            set { SetValue(value); }
+        }
+
         public string Result
         {
             get { return GetValue<String>(); }
             set { SetValue(value); }
         }
 
-        public HistoryItem(string compute, string result)
+        public HistoryItem(string compute, string result, string expression)
         {
             Compute = compute;
             Result = result;
+            Expression = expression;
         }
 
         public override string ToString()
