@@ -37,45 +37,45 @@
                 Grid.Row="1"
                 Content="%"
                 FontSize="18"
-                Click="Button_Click"/>
+                Click="Operator_Button_Click"/>
         <Button Grid.Column="1"
                 Grid.ColumnSpan="1"
                 Grid.Row="1"
                 Content="Suppr. Histo"
                 FontSize="18"
-                Click="ClearHistoryButton_Click"/>
+                Click="ClearHistory_Button_Click"/>
         <Button Grid.Column="2"
                 Grid.ColumnSpan="1"
                 Grid.Row="1"
                 Content="Supprimer"
                 FontSize="18"
-                Click="Button_Click"/>
+                Click="Delete_Button_Click"/>
         <Button Grid.Column="3"
                 Grid.ColumnSpan="1"
                 Grid.Row="1"
                 Content="⌫"
                 FontSize="18"
-                Click="BackButton_Click"/>
+                Click="Back_Button_Click"/>
         <!--Ligne 2-->
         <Button Grid.Column="0"
                 Grid.ColumnSpan="1"
                 Grid.Row="2"
                 Content="1/x"
                 FontSize="18"
-                Click="InverseButton_Click"/>
+                Click="Inverse_Button_Click"/>
 
         <Button Grid.Column="1"
                 Grid.ColumnSpan="1"
                 Grid.Row="2"
                 Content="x²"
                 FontSize="18"
-                Click="Button_Click"/>
+                Click="Square_Button_Click"/>
         <Button Grid.Column="2"
                 Grid.ColumnSpan="1"
                 Grid.Row="2"
                 Content="²√x"
                 FontSize="18"
-                Click="Button_Click"/>
+                Click="SquareRoot_Button_Click"/>
         <Button Grid.Column="3"
                 Grid.ColumnSpan="1"
                 Grid.Row="2"
@@ -93,100 +93,100 @@
                 Grid.Row="3"
                 Content="("
                 FontSize="20"
-                Click="Button_Click"/>
+                Click="Operator_Button_Click"/>
         <Button Grid.Column="2"
                 Grid.ColumnSpan="1"
                 Grid.Row="3"
                 Content=")"
                 FontSize="20"
-                Click="Button_Click"/>
+                Click="Operator_Button_Click"/>
         <Button Grid.Column="3"
                 Grid.ColumnSpan="1"
                 Grid.Row="3"
                 Content="+"
                 FontSize="18"
-                Click="Button_Click"/>
+                Click="Operator_Button_Click"/>
         <!--Ligne 4-->
         <Button Grid.Column="0"
                 Grid.ColumnSpan="1"
                 Grid.Row="4"
                 Content="1"
                 FontSize="18" 
-                Click="Button_Click"/>
+                Click="Numeric_Button_Click"/>
         <Button Grid.Column="1"
                 Grid.ColumnSpan="1"
                 Grid.Row="4"
                 Content="2"
                 FontSize="18"
-                Click="Button_Click"/>
+                Click="Numeric_Button_Click"/>
         <Button Grid.Column="2"
                 Grid.ColumnSpan="1"
                 Grid.Row="4"
                 Content="3"
                 FontSize="18"
-                Click="Button_Click"/>
+                Click="Numeric_Button_Click"/>
         <Button Grid.Column="3"
                 Grid.ColumnSpan="1"
                 Grid.Row="4"
                 Content="-"
                 FontSize="18"
-                Click="Button_Click"/>
+                Click="Operator_Button_Click"/>
         <!--Ligne 5-->
         <Button Grid.Column="0"
                 Grid.ColumnSpan="1"
                 Grid.Row="5"
                 Content="4"
                 FontSize="18"
-                Click="Button_Click"/>
+                Click="Numeric_Button_Click"/>
         <Button Grid.Column="1"
                 Grid.ColumnSpan="1"
                 Grid.Row="5"
                 Content="5"
                 FontSize="18"
-                Click="Button_Click"/>
+                Click="Numeric_Button_Click"/>
         <Button Grid.Column="2"
                 Grid.ColumnSpan="1"
                 Grid.Row="5"
                 Content="6"
                 FontSize="18"
-                Click="Button_Click"/>
+                Click="Numeric_Button_Click"/>
         <Button Grid.Column="3"
                 Grid.ColumnSpan="1"
                 Grid.Row="5"
                 Content="*"
                 FontSize="18"
-                Click="Button_Click"/>
+                Click="Operator_Button_Click"/>
         <!--Ligne 6-->
         <Button Grid.Column="0"
                 Grid.ColumnSpan="1"
                 Grid.Row="6"
                 Content="7"
                 FontSize="18"
-                Click="Button_Click"/>
+                Click="Numeric_Button_Click"/>
         <Button Grid.Column="1"
                 Grid.ColumnSpan="1"
                 Grid.Row="6"
                 Content="8"
                 FontSize="18"
-                Click="Button_Click"/>
+                Click="Numeric_Button_Click"/>
         <Button Grid.Column="2"
                 Grid.ColumnSpan="1"
                 Grid.Row="6"
                 Content="9"
                 FontSize="18"
-                Click="Button_Click"/>
+                Click="Numeric_Button_Click"/>
         <Button Grid.Column="3"
                 Grid.ColumnSpan="1"
                 Grid.Row="6"
                 Content="/"
                 FontSize="18"
-                Click="Button_Click"/>
+                Click="Operator_Button_Click"/>
         <!--Ligne 7-->
         <Button Grid.Column="0"
                 Grid.ColumnSpan="1"
                 Grid.Row="7"
                 Content="Historique"
-                Click="ToggleHistoryButton_Click"
+                Click="ToggleHistory_Button_Click"
                 FontSize="20"/>
 
         <Button Grid.Column="1"
@@ -194,19 +194,19 @@
                 Grid.Row="7"
                 Content="0"
                 FontSize="18"
-                Click="Button_Click"/>
+                Click="Numeric_Button_Click"/>
         <Button Grid.Column="2"
                 Grid.ColumnSpan="1"
                 Grid.Row="7"
                 Content=","
                 FontSize="18"
-                Click="Button_Click"/>
+                Click="Comma_Button_Click"/>
         <Button Grid.Column="3"
                 Grid.ColumnSpan="1"
                 Grid.Row="7"
                 Content="="
                 FontSize="18"
-                Click="ComputeButton_Click"/>
+                Click="Compute_Button_Click"/>
 
         <ListBox Grid.Column="5"
                  Grid.RowSpan="8"
@@ -218,4 +218,28 @@
                  SelectedItem="{Binding SelectedItem}"/>
 
     </Grid>
+    <Window.InputBindings>
+        <KeyBinding Command="{Binding NumericInput}" Key="NumPad0" CommandParameter="0" />
+        <KeyBinding Command="{Binding NumericInput}" Key="NumPad1" CommandParameter="1" />
+        <KeyBinding Command="{Binding NumericInput}" Key="NumPad2" CommandParameter="2" />
+        <KeyBinding Command="{Binding NumericInput}" Key="NumPad3" CommandParameter="3" />
+        <KeyBinding Command="{Binding NumericInput}" Key="NumPad4" CommandParameter="4" />
+        <KeyBinding Command="{Binding NumericInput}" Key="NumPad5" CommandParameter="5" />
+        <KeyBinding Command="{Binding NumericInput}" Key="NumPad6" CommandParameter="6" />
+        <KeyBinding Command="{Binding NumericInput}" Key="NumPad7" CommandParameter="7" />
+        <KeyBinding Command="{Binding NumericInput}" Key="NumPad8" CommandParameter="8" />
+        <KeyBinding Command="{Binding NumericInput}" Key="NumPad9" CommandParameter="9" />
+
+        <KeyBinding Command="{Binding OperatorInput}" Key="Add" CommandParameter="+" />
+        <KeyBinding Command="{Binding OperatorInput}" Key="Subtract" CommandParameter="-" />
+        <KeyBinding Command="{Binding OperatorInput}" Key="Multiply" CommandParameter="*" />
+        <KeyBinding Command="{Binding OperatorInput}" Key="Divide" CommandParameter="/" />
+        <KeyBinding Command="{Binding OperatorInput}" Key="D5" CommandParameter="(" />
+        <KeyBinding Command="{Binding OperatorInput}" Key="OemOpenBrackets" CommandParameter=")" />
+
+        <KeyBinding Command="{Binding GeneralInput}" Key="Backspace" CommandParameter="⌫" />
+        <KeyBinding Command="{Binding GeneralInput}" Key="Delete" CommandParameter="Supprimer" />
+
+        <KeyBinding Command="{Binding GeneralInput}" Key="Enter"/>
+    </Window.InputBindings>
 </Window>

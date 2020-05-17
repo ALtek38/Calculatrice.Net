@@ -7,17 +7,6 @@ namespace Calculatrice_NET
 {
     class Evaluator
     {
-        /*static void Main(string[] args)
-        {
-            Thread.CurrentThread.CurrentCulture = CultureInfo.InvariantCulture;
-
-            string rpn = "3 4 2 * 1 5 - 2 3 ^ ^ / +";
-            Console.WriteLine("{0}\n", rpn);
-
-            decimal result = Calculate(rpn);
-            Console.WriteLine("\nResult is {0}", result);
-        }*/
-
         public static decimal Calculate(string parsedCalculation)
         {
             string[] rpnTokens = parsedCalculation.Split(' ');

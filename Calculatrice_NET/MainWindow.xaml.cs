@@ -87,102 +87,32 @@ namespace Calculatrice_NET
             MessageBox.Show(message, "Erreur");
         }
 
-        // Gestion des clics des boutons
-
-        // Affichage des valeurs dans l'écran de calcul
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void Operator_Button_Click(Object sender, RoutedEventArgs e)
         {
-            switch (sender.ToString())
-            {
-                // Numeric values
-                case "System.Windows.Controls.Button: 0":
-                    Display += "0";
-                    CurrentExpression += "0";
-                    break;
-                case "System.Windows.Controls.Button: 1":
-                    Display += "1";
-                    CurrentExpression += "1";
-                    break;
-                case "System.Windows.Controls.Button: 2":
-                    Display += "2";
-                    CurrentExpression += "2";
-                    break;
-                case "System.Windows.Controls.Button: 3":
-                    Display += "3";
-                    CurrentExpression += "3";
-                    break;
-                case "System.Windows.Controls.Button: 4":
-                    Display += "4";
-                    CurrentExpression += "4";
-                    break;
-                case "System.Windows.Controls.Button: 5":
-                    Display += "5";
-                    CurrentExpression += "5";
-                    break;
-                case "System.Windows.Controls.Button: 6":
-                    Display += "6";
-                    CurrentExpression += "6";
-                    break;
-                case "System.Windows.Controls.Button: 7":
-                    Display += "7";
-                    CurrentExpression += "7";
-                    break;
-                case "System.Windows.Controls.Button: 8":
-                    Display += "8";
-                    CurrentExpression += "8";
-                    break;
-                case "System.Windows.Controls.Button: 9":
-                    Display += "9";
-                    CurrentExpression += "9";
-                    break;
-                // Operators
-                case "System.Windows.Controls.Button: +":
-                    Display += "+";
-                    CurrentExpression += " + ";
-                    break;
-                case "System.Windows.Controls.Button: -":
-                    Display += "-";
-                    CurrentExpression += " - ";
-                    break;
-                case "System.Windows.Controls.Button: /":
-                    Display += "/";
-                    CurrentExpression += " / ";
-                    break;
-                case "System.Windows.Controls.Button: *":
-                    Display += "*";
-                    CurrentExpression += " * ";
-                    break;
-                // Others
-                case "System.Windows.Controls.Button: (":
-                    Display += "(";
-                    CurrentExpression += " ( ";
-                    break;
-                case "System.Windows.Controls.Button: )":
-                    Display += ")";
-                    CurrentExpression += " ) ";
-                    break;
-                case "System.Windows.Controls.Button: ,":
-                    Display += ".";
-                    CurrentExpression += " . ";
-                    break;
-                case "System.Windows.Controls.Button: Supprimer":
-                    Display = "";
-                    CurrentExpression = "";
-                    break;
-            }
+            string content = (sender as Button).Content.ToString();
+
+            Display += content;
+            CurrentExpression += " " + content + " ";
+        }
+        private void Numeric_Button_Click(Object sender, RoutedEventArgs e)
+        {
+            string content = (sender as Button).Content.ToString();
+
+            Display += content;
+            CurrentExpression += content
         }
 
-        private void BackButton_Click(object sender, RoutedEventArgs e)
+        private void Back_Button_Click(object sender, RoutedEventArgs e)
         {
-            if (Display != null && Display.Length > 0 )
+            if (Display != null && Display.Length > 0)
             {
                 // On supprime le dernier caractère du calcul
                 Display = Display.Remove(Display.Length - 1);
-                CurrentExpression = CurrentExpression.Remove(CurrentExpression.Length - 2);
+                CurrentExpression = CurrentExpression.Remove(CurrentExpression.Length - 1);
             }
         }
 
-        private void ComputeButton_Click(object sender, RoutedEventArgs e)
+        private void Compute_Button_Click(object sender, RoutedEventArgs e)
         {
             if (Display != null && Display.Length > 0)
             {
@@ -207,7 +137,7 @@ namespace Calculatrice_NET
             History.Add(new HistoryItem(compute, result, expression));
         }
 
-        private void ClearHistoryButton_Click(object sender, RoutedEventArgs e)
+        private void ClearHistory_Button_Click(object sender, RoutedEventArgs e)
         {
             History.Clear();
         }
@@ -222,7 +152,7 @@ namespace Calculatrice_NET
             }
         }
 
-        private void InverseButton_Click(object sender, RoutedEventArgs e)
+        private void Inverse_Button_Click(object sender, RoutedEventArgs e)
         {
             try
             {
@@ -240,7 +170,7 @@ namespace Calculatrice_NET
             }
         }
 
-        private void ToggleHistoryButton_Click(object sender, RoutedEventArgs e)
+        private void ToggleHistory_Button_Click(object sender, RoutedEventArgs e)
         {
             if (HistoryListBox.Visibility == Visibility.Hidden) {
                 HistoryListBox.Visibility = Visibility.Visible;
